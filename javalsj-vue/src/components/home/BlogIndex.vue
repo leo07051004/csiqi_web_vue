@@ -34,7 +34,7 @@
           width="120">
           <template slot-scope="scope">
             <el-button
-              @click.native.prevent="acList()"
+              @click.native.prevent="aplayAc(scope.$index, tableData)"
               type="text"
               size="small">
               报名
@@ -93,7 +93,6 @@
           this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
         if (successResponse.status === 200) {
           that.tableData=this.responseResult;
-          console.log(that.tableData);
         }
       }).catch(failResponse => {})
       }
