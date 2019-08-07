@@ -5,62 +5,47 @@
     <div>
       <el-table
         :data="tableData"
-        border
-        show-summary
-        style="width: 100%">
+        style="width: 100%"
+        max-height="550">
         <el-table-column
-          prop="id"
-          label="ID"
-          width="180">
+          fixed
+          prop="f_ac_begintime"
+          label="开始日期"
+          width="95">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名">
+          prop="f_ac_name"
+          label="名称"
+          width="120">
         </el-table-column>
         <el-table-column
-          prop="amount1"
-          sortable
-          label="数值 1">
+          prop="f_ac_usernum"
+          label="人数"
+          width="120">
         </el-table-column>
         <el-table-column
-          prop="amount2"
-          sortable
-          label="数值 2">
+          prop="f_ac_keys"
+          label="标签"
+          width="770">
         </el-table-column>
         <el-table-column
-          prop="amount3"
-          sortable
-          label="数值 3">
-        </el-table-column>
-      </el-table>
-
-      <el-table
-        :data="tableData"
-        border
-        height="200"
-        :summary-method="getSummaries"
-        show-summary
-        style="width: 100%; margin-top: 20px">
-        <el-table-column
-          prop="id"
-          label="ID"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="姓名">
-        </el-table-column>
-        <el-table-column
-          prop="amount1"
-          label="数值 1（元）">
-        </el-table-column>
-        <el-table-column
-          prop="amount2"
-          label="数值 2（元）">
-        </el-table-column>
-        <el-table-column
-          prop="amount3"
-          label="数值 3（元）">
+          fixed="right"
+          label="操作"
+          width="120">
+          <template slot-scope="scope">
+            <el-button
+              @click.native.prevent="aplayAc(scope.$index, tableData)"
+              type="text"
+              size="small">
+              报名
+            </el-button>
+            <el-button
+              @click.native.prevent="deleteRow(scope.$index, tableData)"
+              type="text"
+              size="small">
+              删除
+            </el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -82,68 +67,109 @@
     name: 'BlogIndex',
     // blogHeader/blogFooter组件给申明到components里面然后在template里面使用
     components: { blogHeader, blogFooter },
+    methods: {
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
+      },
+      aplayAc(index, rows) {
+        console.log(rows[index].f_ac_id);
+        this.$router.replace({path: '/acAdd'})
+      },
+    },
     data() {
       return {
         tableData: [{
-          id: '12987122',
-          name: '王小虎',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
+          f_ac_id:'1',
+          f_ac_begintime: '2016-05-03',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
         }, {
-          id: '12987123',
-          name: '王小虎',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
+          f_ac_id:'2',
+          f_ac_begintime: '2016-05-02',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
         }, {
-          id: '12987124',
-          name: '王小虎',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
+          f_ac_id:'3',
+          f_ac_begintime: '2016-05-04',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
         }, {
-          id: '12987125',
-          name: '王小虎',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
+          f_ac_id:'4',
+          f_ac_begintime: '2016-05-01',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
         }, {
-          id: '12987126',
-          name: '王小虎',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
+          f_ac_id:'5',
+          f_ac_begintime: '2016-05-08',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'6',
+          f_ac_begintime: '2016-05-06',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'7',
+          f_ac_begintime: '2016-05-07',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'8',
+          f_ac_begintime: '2016-05-06',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'9',
+          f_ac_begintime: '2016-05-07',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'10',
+          f_ac_begintime: '2016-05-06',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'11',
+          f_ac_begintime: '2016-05-07',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'12',
+          f_ac_begintime: '2016-05-06',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'13',
+          f_ac_begintime: '2016-05-07',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'14',
+          f_ac_begintime: '2016-05-06',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
+        }, {
+          f_ac_id:'15',
+          f_ac_begintime: '2016-05-07',
+          f_ac_name: '王小虎',
+          f_ac_usernum: '上海',
+          f_ac_keys: '普陀区',
         }]
-      };
-    },
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = '总价';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-            sums[index] += ' 元';
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-
-        return sums;
       }
     }
-  };
+  }
 </script>
