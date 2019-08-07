@@ -30,6 +30,6 @@ export default new Router({
       path: '/acAdd',
       name: 'AcAdd',
       component: AcAdd
-    }
+    },
   ]
 })

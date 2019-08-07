@@ -34,7 +34,7 @@
           width="120">
           <template slot-scope="scope">
             <el-button
-              @click.native.prevent="aplayAc(scope.$index, tableData)"
+              @click.native.prevent="acList()"
               type="text"
               size="small">
               报名
@@ -75,101 +75,27 @@
         console.log(rows[index].f_ac_id);
         this.$router.replace({path: '/acAdd'})
       },
+
     },
     data() {
       return {
-        tableData: [{
-          f_ac_id:'1',
-          f_ac_begintime: '2016-05-03',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'2',
-          f_ac_begintime: '2016-05-02',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'3',
-          f_ac_begintime: '2016-05-04',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'4',
-          f_ac_begintime: '2016-05-01',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'5',
-          f_ac_begintime: '2016-05-08',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'6',
-          f_ac_begintime: '2016-05-06',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'7',
-          f_ac_begintime: '2016-05-07',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'8',
-          f_ac_begintime: '2016-05-06',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'9',
-          f_ac_begintime: '2016-05-07',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'10',
-          f_ac_begintime: '2016-05-06',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'11',
-          f_ac_begintime: '2016-05-07',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'12',
-          f_ac_begintime: '2016-05-06',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'13',
-          f_ac_begintime: '2016-05-07',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'14',
-          f_ac_begintime: '2016-05-06',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }, {
-          f_ac_id:'15',
-          f_ac_begintime: '2016-05-07',
-          f_ac_name: '王小虎',
-          f_ac_usernum: '上海',
-          f_ac_keys: '普陀区',
-        }]
+          tableData: [{a:0}]
+        }
+    },
+    mounted(){
+        var that=this;
+        this.$axios
+          .post('/acList', {
+            pageNum:1,
+            pageSize:10
+          })
+          .then(successResponse => {
+          this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
+        if (successResponse.status === 200) {
+          that.tableData=this.responseResult;
+          console.log(that.tableData);
+        }
+      }).catch(failResponse => {})
       }
-    }
   }
 </script>
