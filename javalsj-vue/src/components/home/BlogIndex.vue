@@ -6,7 +6,9 @@
       <el-table
         :data="tableData"
         style="width: 100%"
-        max-height="550">
+        max-height="550"
+        :stripe="true"
+      >
         <el-table-column
           fixed
           prop="f_ac_begintime"
@@ -19,6 +21,11 @@
           width="120">
         </el-table-column>
         <el-table-column
+          prop="f_ac_adminName"
+          label="主持人"
+          width="120">
+        </el-table-column>
+        <el-table-column
           prop="f_ac_usernum"
           label="人数"
           width="120">
@@ -26,7 +33,12 @@
         <el-table-column
           prop="f_ac_keys"
           label="标签"
-          width="770">
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="f_ac_desc"
+          label="活动详情"
+          width="470">
         </el-table-column>
         <el-table-column
           fixed="right"
