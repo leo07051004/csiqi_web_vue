@@ -9,14 +9,18 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI);
 
 // 引用axios，并设置基础URL为后端服务api地址
-var axios = require('axios')
-axios.defaults.baseURL = 'http://127.0.0.1:8081/csiqi/api'
+var axios = require('axios');
+axios.defaults.baseURL = 'http://127.0.0.1:8081/csiqi/api';
+// `withCredentials` indicates whether or not cross-site Access-Control requests
+// should be made using credentials  跨域携带cookie
+axios.defaults.withCredentials = true;
+// axios.defaults.crossDomain=true
 // 将API方法绑定到全局
-Vue.prototype.$axios = axios
-Vue.config.productionTip = false
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({

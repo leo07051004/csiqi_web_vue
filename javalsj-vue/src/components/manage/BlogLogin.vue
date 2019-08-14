@@ -2,12 +2,6 @@
 
 
   <div class="loginPage">
-    <!--<blog-header></blog-header><br/>-->
-
-    <!--<div class="block">
-      <span class="demonstration">默认</span>
-      <el-image :src="IMG_1665.png"></el-image>
-    </div>-->
     <div>
       用户名:<!--<input type="text" v-model="loginInfoVo.username" placeholder="请输入用户名" />-->
       <el-input v-model="loginInfoVo.username" placeholder="请输入用户名"></el-input>
