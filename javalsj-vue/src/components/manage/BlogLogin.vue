@@ -39,7 +39,7 @@
 <script>
   import blogHeader from '@/components/common/BlogHeader.vue'
   import blogFooter from '@/components/common/BlogFooter.vue'
-
+  import querystring from 'querystring'
   export default {
     name: 'BlogLogin',
     // blogHeader、blogFooter组件给申明到components里面然后在template里面使用
