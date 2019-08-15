@@ -17,8 +17,6 @@ axios.defaults.baseURL = 'http://127.0.0.1:8081/csiqi/api';
 // `withCredentials` indicates whether or not cross-site Access-Control requests
 // should be made using credentials  跨域携带cookie
 axios.defaults.withCredentials = true;
-//axios.defaults.headers='Origin, X-Requested-With, Content-Type, Accept';
-// axios.defaults.headers.post['content-type'] = 'application/json;charset=UTF-8';
 axios.defaults.crossDomain=true
 // 将API方法绑定到全局
 Vue.prototype.$axios = axios;
