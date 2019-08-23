@@ -2,12 +2,17 @@
   <div>
     <blog-header></blog-header>
     <br/>
-    <div>
+    <div
+
+    >
       <el-table
         :data="tableData"
         style="width: 100%"
         max-height="550"
         :stripe="true"
+        v-infinite-scroll="load"
+        infinite-scroll-distance="40"
+        infinite-scroll-disabled="false"
       >
         <el-table-column
           fixed
@@ -60,6 +65,8 @@
           </template>
         </el-table-column>
       </el-table>
+      <p v-if="loading">加载中...</p>
+      <p v-if="noMore">没有更多了</p>
     </div>
     <br/>
     <blog-footer></blog-footer>
@@ -87,11 +94,16 @@
         console.log(rows[index].f_ac_id);
         this.$router.replace({path: '/acAdd'})
       },
-
+      load(){
+        console.log(this.loading);
+        this.loading = true
+      }
     },
     data() {
       return {
-          tableData: [{a:0}]
+          tableData: [{a:0}],
+          loading: false,
+          count: 10,
         }
     },
     mounted(){
@@ -107,6 +119,14 @@
           that.tableData=this.responseResult;
         }
       }).catch(failResponse => {})
+      },
+    computed: {
+      noMore () {
+        return this.count >= 20
+      },
+      disabled () {
+        return this.loading || this.noMore
       }
+    },
   }
 </script>
