@@ -2,17 +2,12 @@
   <div>
     <blog-header></blog-header>
     <br/>
-    <div
-
-    >
+    <div>
       <el-table
         :data="tableData"
         style="width: 100%"
         max-height="550"
         :stripe="true"
-        v-infinite-scroll="load"
-        infinite-scroll-distance="40"
-        infinite-scroll-disabled="false"
       >
         <el-table-column
           fixed
@@ -65,8 +60,17 @@
           </template>
         </el-table-column>
       </el-table>
-      <p v-if="loading">加载中...</p>
-      <p v-if="noMore">没有更多了</p>
+      <div class="block">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 30, 20, 10]"
+          :page-size="10"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400">
+        </el-pagination>
+      </div>
     </div>
     <br/>
     <blog-footer></blog-footer>
@@ -94,16 +98,20 @@
         console.log(rows[index].f_ac_id);
         this.$router.replace({path: '/acAdd'})
       },
-      load(){
-        console.log(this.loading);
-        this.loading = true
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       }
     },
     data() {
       return {
           tableData: [{a:0}],
-          loading: false,
-          count: 10,
+          currentPage1: 5,
+          currentPage2: 5,
+          currentPage3: 5,
+          currentPage4: 1
         }
     },
     mounted(){
@@ -120,13 +128,5 @@
         }
       }).catch(failResponse => {})
       },
-    computed: {
-      noMore () {
-        return this.count >= 20
-      },
-      disabled () {
-        return this.loading || this.noMore
-      }
-    },
   }
 </script>
