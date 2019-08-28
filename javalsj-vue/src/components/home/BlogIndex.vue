@@ -64,11 +64,11 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="currentPage4"
+          :current-page="currentPage"
           :page-sizes="[100, 30, 20, 10]"
-          :page-size="10"
+          :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="total">
         </el-pagination>
       </div>
     </div>
@@ -99,34 +99,42 @@
         this.$router.replace({path: '/acAdd'})
       },
       handleSizeChange(val) {
+        this.pageSize=val;
+        this.selectData();
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
+        this.pageNum=val;
+        this.selectData();
         console.log(`当前页: ${val}`);
-      }
-    },
-    data() {
-      return {
-          tableData: [{a:0}],
-          currentPage1: 5,
-          currentPage2: 5,
-          currentPage3: 5,
-          currentPage4: 1
-        }
-    },
-    mounted(){
+      },
+      selectData(){
         var that=this;
         this.$axios
-          .post('/acList', {
-            pageNum:1,
-            pageSize:10
+          .post('/acList?pageNum='+that.pageNum+'&pageSize='+that.pageSize, {
+            pageNum:that.pageNum,
+            pageSize:that.pageSize
           })
           .then(successResponse => {
+          this.total=successResponse.data.total;
           this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
         if (successResponse.status === 200) {
           that.tableData=this.responseResult;
         }
       }).catch(failResponse => {})
+      }
+    },
+    data() {
+      return {
+          tableData: [{a:0}],
+          pageNum: 1,
+          pageSize: 10,
+          currentPage: 1,
+          total:0
+        }
+    },
+    mounted(){
+      this.selectData();
       },
   }
 </script>
