@@ -94,19 +94,19 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
-      aplayAc(index, rows) {
+      aplayAc(index, rows) {//AcView.vue
         console.log(rows[index].f_ac_id);
-        this.$router.replace({path: '/acAdd'})
+        this.$router.replace({path: '/acView',query:{key:this.activeIndex}})
       },
       handleSizeChange(val) {
         this.pageSize=val;
         this.selectData();
-        console.log(`每页 ${val} 条`);
+        //console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
         this.pageNum=val;
         this.selectData();
-        console.log(`当前页: ${val}`);
+        //console.log(`当前页: ${val}`);
       },
       selectData(){
         var that=this;
