@@ -94,9 +94,8 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
-      aplayAc(index, rows) {//AcView.vue
-        console.log(rows[index].f_ac_id);
-        this.$router.replace({path: '/acView',query:{key:this.activeIndex}})
+      aplayAc(index, rows) {//BlogHeader
+        this.$router.replace({path: '/acView',query:{key:'1'}})
       },
       handleSizeChange(val) {
         this.pageSize=val;
@@ -112,8 +111,8 @@
         var that=this;
         this.$axios
           .post('/acList?pageNum='+that.pageNum+'&pageSize='+that.pageSize, {
-            pageNum:that.pageNum,
-            pageSize:that.pageSize
+            //pageNum:that.pageNum,
+            //pageSize:that.pageSize
           })
           .then(successResponse => {
           this.total=successResponse.data.total;

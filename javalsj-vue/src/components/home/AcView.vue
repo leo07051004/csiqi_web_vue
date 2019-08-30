@@ -141,8 +141,7 @@
     mounted(){
       //获取传入的参数
       var param = this.$route.query;
-      this.params = param;
-      this.$refs.blogHeader.initPage(this.params.key);
+      this.$refs.blogHeader.initPage(param.key);
     }
   }
 </script>
