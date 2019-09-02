@@ -81,11 +81,6 @@
   import blogHeader from '@/components/common/BlogHeader.vue'
   import blogFooter from '@/components/common/BlogFooter.vue'
   import querystring from 'querystring'
- /* export default {
-    name: 'BlogIndex',
-    // blogHeader/blogFooter组件给申明到components里面然后在template里面使用
-    components: { blogHeader, blogFooter }
-  }*/
   export default {
     name: 'BlogIndex',
     // blogHeader/blogFooter组件给申明到components里面然后在template里面使用
@@ -110,9 +105,9 @@
       selectData(){
         var that=this;
         this.$axios
-          .post('/acList?pageNum='+that.pageNum+'&pageSize='+that.pageSize, {
-            //pageNum:that.pageNum,
-            //pageSize:that.pageSize
+          .post('/acList', {//pageNum='+that.pageNum+'&pageSize='+that.pageSize
+            pageNum:that.pageNum,
+            pageSize:that.pageSize
           })
           .then(successResponse => {
           this.total=successResponse.data.total;
