@@ -4,6 +4,7 @@ import BlogLogin from '@/components/manage/BlogLogin.vue'
 import BlogIndex from '@/components/home/BlogIndex.vue'
 import AcAdd from '@/components/home/AcAdd.vue'
 import AcView from '@/components/home/AcView.vue'
+import SmsPage from '@/components/sms/SmsPage.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,10 @@ export default new Router({
       name: 'AcView',
       component: AcView
     },
-
+    {
+      path: '/smsPage',
+      name: 'SmsPage',
+      component: SmsPage
+    },
   ]
 })
