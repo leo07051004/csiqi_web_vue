@@ -1,37 +1,32 @@
 <template>
 
 
-  <div class="loginPage">
+  <div class="loginPage" align="center">
     <div>
-      用户名:<!--<input type="text" v-model="loginInfoVo.username" placeholder="请输入用户名" />-->
-      <el-input v-model="loginInfoVo.username" placeholder="请输入用户名"></el-input>
-
+      <div style="width: 100%;">
+        用户名:
+        <el-input style="width: 80%;" v-model="loginInfoVo.username" placeholder="请输入用户名"></el-input>
+      </div>
+      <div style="width: 100%;">
+        密码：
+        <el-input style="width: 80%;" v-model="loginInfoVo.password" placeholder="请输入密码" show-password>></el-input>
+      </div>
       <br/>
-      密码：<!--<input type="password" v-model="loginInfoVo.password" placeholder="请输入密码" />-->
-      <el-input v-model="loginInfoVo.password" placeholder="请输入密码" show-password>></el-input>
-
-      <br/>
-      <!--<button v-on:click="login">登录</button>-->
       <el-row>
-      <el-button type="success" v-on:click="login">登录</el-button>
+        <el-button type="success" v-on:click="login">登录</el-button>
         <el-button type="success" >注册</el-button>
-        </el-row>
+      </el-row>
       <br/>
-      登录验证：<!--<textarea cols="35" rows="2" v-model="responseResult"></textarea>-->
-      <el-input type="textarea" :rows="2" placeholder=""  v-model="responseResult"> </el-input>
+      <div style="width: 100%;">
+        验证：<!--<textarea cols="35" rows="2" v-model="responseResult"></textarea>-->
+        <el-input style="width: 80%;" type="textarea" :rows="2" placeholder=""  v-model="responseResult"> </el-input>
+      </div>
     </div>
     <br/>
     <blog-footer></blog-footer>
   </div>
 </template>
 <style>
-  .el-input,.el-textarea{
-    width: 20%;
-    margin-top: 20px;
-  }
-  .el-button{
-    margin-top: 20px;
-  }
   .loginPage{
     margin-top: 100px;
   }
@@ -60,7 +55,7 @@
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
-              this.$router.replace({path: '/index'})
+              this.$router.replace({path: '/index',query:{username:this.loginInfoVo.username}})
             }
           })
           .catch(failResponse => {})

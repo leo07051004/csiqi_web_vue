@@ -1,7 +1,6 @@
 <template>
   <div>
     <blog-header></blog-header>
-    <br/>
     <div>
       <el-table
         :data="tableData"
@@ -72,7 +71,6 @@
         </el-pagination>
       </div>
     </div>
-    <br/>
     <blog-footer></blog-footer>
   </div>
 </template>
@@ -124,7 +122,7 @@
           pageNum: 1,
           pageSize: 10,
           currentPage: 1,
-          total:0
+          total:0,
         }
     },
     mounted(){

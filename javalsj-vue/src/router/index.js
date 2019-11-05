@@ -5,6 +5,7 @@ import BlogIndex from '@/components/home/BlogIndex.vue'
 import AcAdd from '@/components/home/AcAdd.vue'
 import AcView from '@/components/home/AcView.vue'
 import SmsPage from '@/components/sms/SmsPage.vue'
+import SmsUserList from '@/components/sms/SmsUserList.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/smsPage',
       name: 'SmsPage',
       component: SmsPage
+    },
+    {
+      path: '/smsUserList',
+      name: 'SmsUserList',
+      component: SmsUserList
     },
   ]
 })

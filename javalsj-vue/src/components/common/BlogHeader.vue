@@ -15,6 +15,7 @@
         <el-menu-item index="2-1">新增活动</el-menu-item>
         <el-menu-item index="2-2">我新增的活动</el-menu-item>
         <el-menu-item index="2-3">我参加的活动</el-menu-item>
+        <el-menu-item index="2-5">好友列表</el-menu-item>
         <!--<el-submenu index="2-4">
           <template slot="title">活动管理</template>
           <el-menu-item index="2-4-1">新增活动</el-menu-item>
@@ -37,6 +38,7 @@
     data() {
       return {
         activeIndex: '1',
+        username :""
       };
     },
     methods: {
@@ -49,7 +51,10 @@
                 this.$router.replace({path: '/acAdd',query:{key:key}})
                 break;
           case "3":
-            this.$router.replace({path: '/smsPage',query:{key:key}})
+            this.$router.replace({path: '/smsPage',query:{key:key,username:this.username}})
+            break;
+          case "2-5":
+            this.$router.replace({path: '/smsUserList',query:{key:key,username:this.username}})
             break;
         }
       },
@@ -58,7 +63,9 @@
       }
     },
     mounted(){
-
+      //获取传入的参数
+      var param = this.$route.query;
+      this.username=param.username;
     }
    }
 </script>
