@@ -15,7 +15,7 @@
           width="95">
         </el-table-column>-->
         <el-table-column
-          prop="f_ac_name"
+          prop="userName"
           label="名称"
           width="120">
         </el-table-column>
@@ -45,10 +45,10 @@
           width="120">
           <template slot-scope="scope">
             <el-button
-              @click.native.prevent="aplayAc(scope.$index, tableData)"
+              @click.native.prevent="smsPage(scope.$index, tableData)"
               type="text"
               size="small">
-              报名
+              聊天
             </el-button>
             <el-button
               @click.native.prevent="deleteRow(scope.$index, tableData)"
@@ -87,8 +87,8 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
-      aplayAc(index, rows) {//BlogHeader
-        this.$router.replace({path: '/acView',query:{key:'1'}})
+      smsPage(index, rows) {//BlogHeader
+        this.$router.replace({path: '/smsPage',query:{toUserId:rows[index].userId,toUserName:rows[index].userName,key:this.key,username:this.username,userId:this.userId}})
       },
       handleSizeChange(val) {
         this.pageSize=val;
@@ -102,8 +102,10 @@
       },
       selectData(){
         var that=this;
+        console.log(`that.userId=`+that.userId);
         this.$axios
-          .post('/acList', {//pageNum='+that.pageNum+'&pageSize='+that.pageSize
+          .post('/friends/friendsList', {//pageNum='+that.pageNum+'&pageSize='+that.pageSize
+            f_friends_uId:that.userId,
             pageNum:that.pageNum,
             pageSize:that.pageSize
           })
@@ -118,12 +120,14 @@
     },
     data() {
       return {
-          tableData: [{a:0}],
+          tableData: [],
           pageNum: 1,
           pageSize: 10,
           currentPage: 1,
           total:0,
-          username:""
+          username:"",
+          key:"",
+          userId:""
         }
     },
     mounted(){
@@ -131,6 +135,9 @@
       var param = this.$route.query;
       this.$refs.blogHeader.initPage(param.key);
       this.username=param.username;
+      this.key=param.key;
+      this.userId=param.userId;
+      console.log("param.username="+param.username);
       this.selectData();
       },
   }

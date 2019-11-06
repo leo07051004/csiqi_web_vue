@@ -55,7 +55,7 @@
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
-              this.$router.replace({path: '/index',query:{username:this.loginInfoVo.username}})
+              this.$router.replace({path: '/index',query:{username:successResponse.data.data.userName,userId:successResponse.data.data.userId}})
             }
           })
           .catch(failResponse => {})

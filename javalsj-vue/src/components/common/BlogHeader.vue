@@ -38,7 +38,8 @@
     data() {
       return {
         activeIndex: '1',
-        username :""
+        username :"",
+        userId :""
       };
     },
     methods: {
@@ -51,10 +52,10 @@
                 this.$router.replace({path: '/acAdd',query:{key:key}})
                 break;
           case "3":
-            this.$router.replace({path: '/smsPage',query:{key:key,username:this.username}})
+            this.$router.replace({path: '/smsPage',query:{key:key,username:this.username,userId:this.userId}})
             break;
           case "2-5":
-            this.$router.replace({path: '/smsUserList',query:{key:key,username:this.username}})
+            this.$router.replace({path: '/smsUserList',query:{key:key,username:this.username,userId:this.userId}})
             break;
         }
       },
@@ -66,6 +67,8 @@
       //获取传入的参数
       var param = this.$route.query;
       this.username=param.username;
+      console.log("param.username222="+param.username);
+      this.userId=param.userId;
     }
    }
 </script>

@@ -2,11 +2,12 @@
   <div>
     <blog-header ref="blogHeader"></blog-header>
     <div id="toUserDiv" align="center">
-      <el-input style="width:77%;" type="text" size="medium" v-model="toUserId" placeholder="请输入聊天对象"></el-input>
+      <div  v-model="toUserName">好友：{{toUserName}}</div>
+      <!--<el-input style="width:77%;" type="text" size="medium" v-model="toUserName" placeholder=""></el-input>-->
     </div>
     <div id="viewDiv" stlye="margin:0px; padding:0px;text-align:left" >
       <ul>
-        <li v-for="item in message_array" style="">{{item.fromUserId}}：{{item.contentText}}</li>
+        <li v-for="item in message_array" style="">{{item.fromUserName}}：{{item.contentText}}</li>
       </ul>
     </div>
     <div id="buttomDiv" align="center">
@@ -43,14 +44,21 @@
         message:"",
         message_array: [], //{"fromUserId":"cp","contentText":"da","toUserId":"21"}
         username:"",
-        toUserId:""
+        userId:"",
+        toUserId:"",
+        key:"",
+        toUserName:"",
       }
     },
     mounted () {
       //获取传入的参数
       var param = this.$route.query;
       this.$refs.blogHeader.initPage(param.key);
+      this.key=param.key;
       this.username=param.username;
+      this.userId=param.userId;
+      this.toUserId=param.toUserId;
+      this.toUserName=param.toUserName;
       // 初始化
       this.init()
     },
@@ -60,7 +68,7 @@
           alert("您的浏览器不支持socket")
         }else{
           // 实例化socket
-          this.socket = new WebSocket(this.path+this.username)
+          this.socket = new WebSocket(this.path+this.userId)
           // 监听socket连接
           this.socket.onopen = this.open
           // 监听socket错误信息
@@ -84,9 +92,9 @@
         console.log(msg.data);
       },
       send: function () {
-        this.message_array.push({"fromUserId":"我","contentText":this.message,"toUserId":this.toUserId});
-        this.socket.send('[{"toUserId":"'+this.toUserId+'","contentText":"'+this.message+'"}]');
-        console.log('[{"toUserId":"'+this.toUserId+'","contentText":"'+this.message+'"}]')
+        this.message_array.push({"fromUserName":"我","contentText":this.message,"toUserId":this.toUserId});
+        this.socket.send('[{"toUserId":"'+this.toUserId+'","fromUserName":"'+this.username+'","contentText":"'+this.message+'"}]');
+        console.log('[{"toUserId":"'+this.toUserId+'","fromUserName":"'+this.username+'","contentText":"'+this.message+'"}]')
         this.message = '';
       },
       close: function () {
