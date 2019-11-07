@@ -52,7 +52,8 @@
                 this.$router.replace({path: '/acAdd',query:{key:key}})
                 break;
           case "3":
-            this.$router.replace({path: '/smsPage',query:{key:key,username:this.username,userId:this.userId}})
+           //this.$router.replace({path: '/smsPage',query:{key:key,username:this.username,userId:this.userId}})
+            this.$router.replace({path: '/smsList',query:{key:key,username:this.username,userId:this.userId}})
             break;
           case "2-5":
             this.$router.replace({path: '/smsUserList',query:{key:key,username:this.username,userId:this.userId}})

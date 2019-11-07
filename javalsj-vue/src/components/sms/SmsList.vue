@@ -16,15 +16,15 @@
         </el-table-column>-->
         <el-table-column
           prop="userName"
-          label="好友列表"
-          width="120">
-        </el-table-column>
-        <!--<el-table-column
-          prop="f_ac_adminName"
-          label="主持人"
+          label="消息列表"
           width="120">
         </el-table-column>
         <el-table-column
+          prop="allcount"
+          label=""
+          width="120">
+        </el-table-column>
+        <!--<el-table-column
           prop="f_ac_usernum"
           label="人数"
           width="120">
@@ -80,7 +80,7 @@
   import blogFooter from '@/components/common/BlogFooter.vue'
   import querystring from 'querystring'
   export default {
-    name: 'SmsUserList',
+    name: 'SmsList',
     // blogHeader/blogFooter组件给申明到components里面然后在template里面使用
     components: { blogHeader, blogFooter },
     methods: {
@@ -104,18 +104,19 @@
         var that=this;
         console.log(`that.userId=`+that.userId);
         this.$axios
-          .post('/friends/friendsList', {//pageNum='+that.pageNum+'&pageSize='+that.pageSize
-            f_friends_uId:that.userId,
+          .post('/message/selectMessage', {
+            f_message_toUId:that.userId,
             pageNum:that.pageNum,
             pageSize:that.pageSize
           })
           .then(successResponse => {
-          this.total=successResponse.data.total;
-          this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
-        if (successResponse.status === 200) {
-          that.tableData=this.responseResult;
-        }
-      }).catch(failResponse => {})
+            this.total=successResponse.data.total;
+            this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
+            if (successResponse.status === 200) {
+              that.tableData=this.responseResult;
+              console.log(that.tableData);
+            }
+          }).catch(failResponse => {})
       },
       requestUserVo(){
         var that=this;
