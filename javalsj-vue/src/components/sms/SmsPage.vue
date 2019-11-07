@@ -2,7 +2,10 @@
   <div>
     <blog-header ref="blogHeader"></blog-header>
     <div id="toUserDiv" align="center">
-      <div  v-model="toUserName">好友：{{toUserName}}</div>
+     <!-- <el-button type="success" @click="backToSmsList"><i class="el-icon-back"></i></el-button>-->
+      <el-button  icon="el-icon-back" ></el-button>
+      <el-button   style="width: 80%;display: inline-block">好友：{{toUserName}}</el-button>
+     <!-- <span   style="width: 80%;display: inline-block">好友：{{toUserName}}</span>-->
       <!--<el-input style="width:77%;" type="text" size="medium" v-model="toUserName" placeholder=""></el-input>-->
     </div>
     <div id="viewDiv" stlye="margin:0px; padding:0px;text-align:left" >
@@ -48,6 +51,8 @@
         toUserId:"",
         key:"",
         toUserName:"",
+        pageNum: 1,
+        pageSize: 10,
       }
     },
     mounted () {
@@ -59,6 +64,7 @@
       this.userId=param.userId;
       this.toUserId=param.toUserId;
       this.toUserName=param.toUserName;
+      this.selectData();
       // 初始化
       this.init()
     },
@@ -99,7 +105,25 @@
       },
       close: function () {
         console.log("socket已经关闭")
-      }
+      },
+      selectData(){
+        var that=this;
+        this.$axios
+          .post('/message/selectMessageByFromUId', {
+            f_message_fromUId:that.toUserId,
+            f_message_toUId:that.userId,
+            pageNum:that.pageNum,
+            pageSize:that.pageSize,
+          })
+          .then(successResponse => {
+          this.total=successResponse.data.total;
+        this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
+        if (successResponse.status === 200) {
+          //that.tableData=this.responseResult;
+          console.log(that.tableData);
+        }
+      }).catch(failResponse => {})
+      },
     },
     destroyed () {
       // 销毁监听

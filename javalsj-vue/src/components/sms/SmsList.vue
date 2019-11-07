@@ -88,7 +88,7 @@
         rows.splice(index, 1);
       },
       smsPage(index, rows) {//BlogHeader
-        this.$router.replace({path: '/smsPage',query:{toUserId:rows[index].userId,toUserName:rows[index].userName,key:this.key,username:this.username,userId:this.userId}})
+        this.$router.replace({path: '/smsPage',query:{toUserId:rows[index].f_message_fromUId,toUserName:rows[index].userName,key:this.key,username:this.username,userId:this.userId}})
       },
       handleSizeChange(val) {
         this.pageSize=val;
