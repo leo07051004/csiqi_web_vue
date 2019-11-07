@@ -5,7 +5,7 @@
     <div>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px" class="demo-ruleForm">
         <el-form-item label="活动名称" prop="f_ac_name">
-          form.f_ac_name
+          {{form.f_ac_name}}
         </el-form-item>
         <el-form-item label="活动人数" prop="f_ac_usernum">
           <el-input v-model="form.f_ac_usernum"></el-input>

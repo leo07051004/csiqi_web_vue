@@ -67,7 +67,6 @@
       //获取传入的参数
       var param = this.$route.query;
       this.username=param.username;
-      console.log("param.username222="+param.username);
       this.userId=param.userId;
     }
    }

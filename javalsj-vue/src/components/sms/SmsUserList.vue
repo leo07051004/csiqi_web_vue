@@ -16,7 +16,7 @@
         </el-table-column>-->
         <el-table-column
           prop="userName"
-          label="名称"
+          label="好友列表"
           width="120">
         </el-table-column>
         <!--<el-table-column
@@ -116,8 +116,23 @@
           that.tableData=this.responseResult;
         }
       }).catch(failResponse => {})
-      }
+      },
+      requestUserVo(){
+        var that=this;
+        this.$axios
+          .post('/requestUserVo', {})
+          .then(successResponse => {
+          //this.responseResult = JSON.stringify(successResponse.data)
+          if (successResponse.data.code === 200) {
+          that.username=successResponse.data.data.userName;
+          that.userId=successResponse.data.data.userId;
+          console.log("that.userId="+that.userId);
+          this.selectData();
+        }
+      }).catch(failResponse => {})
+      },
     },
+
     data() {
       return {
           tableData: [],
@@ -134,11 +149,10 @@
       //获取传入的参数
       var param = this.$route.query;
       this.$refs.blogHeader.initPage(param.key);
-      this.username=param.username;
+      //this.username=param.username;
+      //this.userId=param.userId;
       this.key=param.key;
-      this.userId=param.userId;
-      console.log("param.username="+param.username);
-      this.selectData();
+      this.requestUserVo();
       },
   }
 </script>
