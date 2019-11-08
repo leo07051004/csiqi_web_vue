@@ -10,7 +10,7 @@
     </div>
     <div id="viewDiv" stlye="margin:0px; padding:0px;text-align:left" >
       <ul>
-        <li v-for="item in message_array" style="">{{item.fromUserName}}：{{item.contentText}}</li>
+        <li v-for="item in message_array" style="">{{item.userName}}：{{item.f_message_content}}</li>
       </ul>
     </div>
     <div id="buttomDiv" align="center">
@@ -45,14 +45,14 @@
         path:"ws://127.0.0.1:8081/csiqi/websocket/",
         socket:"",
         message:"",
-        message_array: [], //{"fromUserId":"cp","contentText":"da","toUserId":"21"}
+        message_array: [], //{"fromUserName":"cl","fromUserId":"cp","contentText":"da","toUserId":"21"}
         username:"",
         userId:"",
         toUserId:"",
         key:"",
         toUserName:"",
-        pageNum: 1,
-        pageSize: 10,
+        pageNum: 0,
+        pageSize: 0,
       }
     },
     mounted () {
@@ -91,16 +91,16 @@
       },
       getMessage: function (msg) {
         var resultJson=JSON.parse(msg.data);
-        console.log(resultJson.data.fromUserId);
-        if(resultJson.data.fromUserId){
+        console.log(resultJson.data.f_message_fromUId);
+        if(resultJson.data.f_message_fromUId){
           this.message_array.push(resultJson.data);
         }
         console.log(msg.data);
       },
       send: function () {
-        this.message_array.push({"fromUserName":"我","contentText":this.message,"toUserId":this.toUserId});
-        this.socket.send('[{"toUserId":"'+this.toUserId+'","fromUserName":"'+this.username+'","contentText":"'+this.message+'"}]');
-        console.log('[{"toUserId":"'+this.toUserId+'","fromUserName":"'+this.username+'","contentText":"'+this.message+'"}]')
+        this.message_array.push({"userName":this.username,"f_message_content":this.message,"f_message_toUId":this.toUserId});
+        this.socket.send('[{"f_message_toUId":"'+this.toUserId+'","userName":"'+this.username+'","f_message_content":"'+this.message+'"}]');
+        console.log('[{"f_message_toUId":"'+this.toUserId+'","userName":"'+this.username+'","f_message_content":"'+this.message+'"}]')
         this.message = '';
       },
       close: function () {
@@ -119,8 +119,7 @@
           this.total=successResponse.data.total;
         this.responseResult = successResponse.data.list;//JSON.stringify(successResponse.data.list)
         if (successResponse.status === 200) {
-          //that.tableData=this.responseResult;
-          console.log(that.tableData);
+          that.message_array=this.responseResult;
         }
       }).catch(failResponse => {})
       },
