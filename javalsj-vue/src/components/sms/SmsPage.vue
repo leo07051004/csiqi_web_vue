@@ -42,6 +42,7 @@
     components: { blogHeader, blogFooter },
     data () {
       return {
+        //path:"ws://47.99.196.57:8081/csiqi/websocket/",
         path:"ws://127.0.0.1:8081/csiqi/websocket/",
         socket:"",
         message:"",
@@ -106,7 +107,7 @@
       close: function () {
         console.log("socket已经关闭")
       },
-      selectData(){
+      selectData: function () {
         var that=this;
         this.$axios
           .post('/message/selectMessageByFromUId', {

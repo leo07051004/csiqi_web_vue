@@ -14,6 +14,7 @@ Vue.use(ElementUI);
 // 引用axios，并设置基础URL为后端服务api地址
 var axios = require('axios');
 axios.defaults.baseURL = 'http://127.0.0.1:8081/csiqi/api';
+//axios.defaults.baseURL = 'http://47.99.196.57/csiqi/api';
 // `withCredentials` indicates whether or not cross-site Access-Control requests
 // should be made using credentials  跨域携带cookie
 axios.defaults.withCredentials = true;
