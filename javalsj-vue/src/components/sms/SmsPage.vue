@@ -42,8 +42,9 @@
     components: { blogHeader, blogFooter },
     data () {
       return {
+        path:"ws://www.csiqi.cn:8081/csiqi/websocket/", //服务器使用此地址
         //path:"ws://47.99.196.57:8081/csiqi/websocket/",
-        path:"ws://127.0.0.1:8081/csiqi/websocket/",
+        //path:"ws://127.0.0.1:8081/csiqi/websocket/",//本地电脑使用此地址
         socket:"",
         message:"",
         message_array: [], //{"fromUserName":"cl","fromUserId":"cp","contentText":"da","toUserId":"21"}
